@@ -1,0 +1,158 @@
+.body {
+    font-family: sans-serif;
+    font-size: 40px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    margin: 0 auto;
+    background: #E5E5E5;
+}
+
+.perentWrap {
+    margin: 0 auto;
+    width: 1960;
+    height: 510px;
+    background: #E5E5E5;
+    padding-top: 20px;
+    padding-left: 50px;
+}
+
+.perent {
+    width: 1960px;
+    height: 470px;
+    margin: 0 auto;
+    position: absolute;
+    display: flex;
+    background-color: #E5E5E5;
+    ;
+}
+
+.wrapper {
+    margin: 0 auto;
+    height: 452px;
+    width: 612px;
+    padding-top: 14px;
+    padding-left: 12px;
+    background-color: #FFFFFF;
+}
+
+.window {
+    width: 600px;
+    height: 435px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+    grid-template-rows: 45px 45px 4fr 45px
+}
+
+.header {
+    display: grid;
+    grid-column: 1/5;
+    border: 1px solid #000000;
+    grid-auto-flow: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.infoWeaser {
+    display: grid;
+    grid-column: 1/4;
+    grid-row: 2/5;
+    border: 1px solid #000000;
+}
+
+.nowBtn {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 4/5;
+    border: 1px solid #000000;
+    padding: 12px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    background-color: #FFFFFF;
+}
+
+.detailsBtn {
+    display: grid;
+    grid-column: 2/3;
+    grid-row: 4/5;
+    border: 1px solid #000000;
+    padding: 12px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    background-color: #FFFFFF;
+}
+
+.forecastBtn {
+    display: grid;
+    grid-column: 3/4;
+    grid-row: 4/5;
+    border: 1px solid #000000;
+    padding: 12px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    background-color: #FFFFFF;
+}
+
+.addLocation {
+    border: 1px solid #000000;
+    display: grid;
+    grid-column: 4/5;
+    grid-row: 2/3;
+    align-items: flex-end;
+    padding-left: 18px;
+    padding-bottom: 5px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.list {
+    display: grid;
+    grid-row: 3/6;
+    grid-column: 4/5;
+    border: 1px solid #000000;
+    align-items: flex-start;
+    align-content: space-around;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 43px;
+}
+
+.inputWindow {
+    height: 22px;
+    width: 550px;
+    border: none;
+    margin-left: 5px;
+    grid-row: 4/5;
+}
+
+.inputButton {
+    width: 22px;
+    height: 22px;
+    background: #FFFFFF;
+    margin-right: 5px;
+    grid-row: 4/5;
+}
+
+.listLocation {
+    list-style: none;
+    padding: 18px;
+    align-items: center;
+    grid-row: 4/5;
+}
