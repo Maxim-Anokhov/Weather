@@ -318,9 +318,3 @@ div[name="infoWeather"] {
 div[name="infoWeather"]:target {
     display: grid;
 }
-
-
-/* 
-div[name="infoWeather"]::before {
-    content: "";
-} */
