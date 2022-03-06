@@ -10,95 +10,77 @@
 </head>
 
 <body>
-    <div class="perentWrap">
-
-        <div class="perent">
-
-            <div class="wrapper">
-                <div class="window">
-                    <form class="header">
-                        <input type="text" class="inputWindow" value="Actobe">
-                        <input type="button" class="inputButton">
-                    </form>
-                    <div class="infoWeatherNow">
-
-                        <div class="temperature"> 14<img src="mask.png" alt="" class="celc"></div>
-                        <img src="i-cloud.png" alt="" class="atmosfere">
-                        <p class="city">Actobe</p>
-                        <img src="shape.png" alt="" class="hard">
-
+    <div class="wrapper">
+        <div class="window">
+            <form class="header">
+                <input type="text" class="inputWindow" value="Actobe">
+                <input type="image" src="glass.png" class="inputButton">
+            </form>
+            <div id="now" class="infoWeatherNow" name="infoWeather">
+                <div class="temperature"> 14<img src="mask.png" alt="" class="celc"></div>
+                <img src="i-cloud.png" alt="" class="atmosfere">
+                <p class="city">Actobe</p>
+                <input type="image" src="shape.png" alt="" class="heart">
+            </div>
+            <div id="details" class="infoWeatherDetails" name="infoWeather">
+                <li class="cityName">Aktobe</li>
+                <li class="">Temperature: 14&#176;</li>
+                <li class="">Feels like: 10&#176;</li>
+                <li class="">Weather: Clouds</li>
+                <li class="">Sunrise: 03:21</li>
+                <li class="">Sunset: 18:54</li>
+            </div>
+            <div id="forecast" class="infoWeatherForecast" name="infoWeather">
+                <li class="lastCityName">Aktobe</li>
+                <div class="forecast">
+                    <div class="forecastWindow">
+                        <li class="date">17 May</li>
+                        <li class="time">12:00</li>
+                        <li class="temper">Temperature: 13&#176;</li>
+                        <li class="feelsLike">Feels Like: 10&#176;</li>
+                        <li class="weatheronditions">Rain<img src="i-rain.png" alt=""></li>
                     </div>
-                    <button type="button" class="nowBtn">Now</button>
-                    <button type="button" class="detailsBtn">Details</button>
-                    <button type="button" class="forecastBtn">Forecast</button>
-                    <div class="addLocation">Added Location:</div>
-                    <div class="list">
-                        <ul class="listLocation">
-                            <li>Amur</li>
-                            <li>Samara</li>
-                            <li>Bali</li>
-                            <li>Dane</li>
-                            <li>Kilo</li>
-                            <li>Nur-Sultan</li>
-                        </ul>
+                    <div class="forecastWindow">
+                        <li class="date">17 May</li>
+                        <li class="time">15:00</li>
+                        <li class="temper">Temperature: 13&#176;</li>
+                        <li class="feelsLike">Feels Like: 10&#176;</li>
+                        <li class="weatheronditions">Rain<img src="i-rain.png" alt=""></li>
+                    </div>
+                    <div class="forecastWindow">
+                        <li class="date">17 May</li>
+                        <li class="time">18:00</li>
+                        <li class="temper">Temperature: 13&#176;</li>
+                        <li class="feelsLike">Feels Like: 10&#176;</li>
+                        <li class="weatheronditions">Rain<img src="i-rain.png" alt=""></li>
                     </div>
                 </div>
 
             </div>
-            <div class="wrapper">
 
-                <div class="window" id="">
-
-                    <form class="header">
-                        <input type="text" class="inputWindow" value="Actobe">
-                        <input type="button" class="inputButton">
-                    </form>
-                    <div class="infoWeatherDetails">2</div>
-                    <button type="button" class="nowBtn">Now</button>
-                    <button type="button" class="detailsBtn">Details</button>
-                    <button type="button" class="forecastBtn">Forecast</button>
-                    <div class="addLocation">Added Location:</div>
-                    <div class="list">
-                        <ul class="listLocation">
-                            <li>Amur</li>
-                            <li>Samara</li>
-                            <li>Bali</li>
-                            <li>Dane</li>
-                            <li>Kilo</li>
-                            <li>Nur-Sultan</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-            <div class="wrapper">
-
-                <div class="window">
-
-                    <form class="header">
-                        <input type="text" class="inputWindow" value="Actobe">
-                        <input type="button" class="inputButton">
-                    </form>
-                    <div class="infoWeatherForecast"></div>
-                    <button type="button" class="nowBtn">Now</button>
-                    <button type="button" class="detailsBtn">Details</button>
-                    <button type="button" class="forecastBtn">Forecast</button>
-                    <div class="addLocation">Added Location:</div>
-                    <div class="list">
-                        <ul class="listLocation">
-                            <li>Amur</li>
-                            <li>Samara</li>
-                            <li>Bali</li>
-                            <li>Dane</li>
-                            <li>Kilo</li>
-                            <li>Nur-Sultan</li>
-                        </ul>
-                    </div>
-                </div>
-
+            <a href="#now" class="nowBtn">Now </a>
+            <a href="#details" class="detailsBtn">Details</a>
+            <a href="#forecast" class="forecastBtn">Forecast</a>
+            <div class="addLocation">Added Location:</div>
+            <div class="list">
+                <ul class="listLocation">
+                    <li>Amur</li>
+                    <li>Samara</li>
+                    <li>Bali</li>
+                    <li>Dane</li>
+                    <li>Kilo</li>
+                    <li>Nur-Sultan</li>
+                </ul>
             </div>
         </div>
+
     </div>
+
+
+
+
+
+
 
 
 
