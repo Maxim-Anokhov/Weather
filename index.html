@@ -12,26 +12,26 @@
 <body>
     <div class="wrapper">
         <div class="window">
-            <form class="header">
-                <input type="text" class="inputWindow" value="Actobe">
+            <form onsubmit="return false" class="header">
+                <input type="text" class="inputWindow" value="Aktobe">
                 <input type="image" src="glass.png" class="inputButton">
             </form>
             <div id="now" class="infoWeatherNow" name="infoWeather">
-                <div class="temperature"> 14<img src="mask.png" alt="" class="celc"></div>
+                <div class="temperature temp"> 14<img src="mask.png" alt="" class="celc"></div>
                 <img src="i-cloud.png" alt="" class="atmosfere">
-                <p class="city">Actobe</p>
+                <p class="city city_name">Aktobe</p>
                 <input type="image" src="shape.png" alt="" class="heart">
             </div>
             <div id="details" class="infoWeatherDetails" name="infoWeather">
-                <li class="cityName">Aktobe</li>
-                <li class="">Temperature: 14&#176;</li>
-                <li class="">Feels like: 10&#176;</li>
-                <li class="">Weather: Clouds</li>
-                <li class="">Sunrise: 03:21</li>
-                <li class="">Sunset: 18:54</li>
+                <li class="cityName city_name">Aktobe</li>
+                <li class="temp">Temperature: 14&#176;</li>
+                <li class="feels">Feels like: 10&#176;</li>
+                <li class="clouds">Weather: Clouds</li>
+                <li class="sunrise">Sunrise: 03:21</li>
+                <li class="sunset">Sunset: 18:54</li>
             </div>
             <div id="forecast" class="infoWeatherForecast" name="infoWeather">
-                <li class="lastCityName">Aktobe</li>
+                <li class="lastCityName city_name">Aktobe</li>
                 <div class="forecast">
                     <div class="forecastWindow">
                         <li class="date">17 May</li>
@@ -64,12 +64,12 @@
             <div class="addLocation">Added Location:</div>
             <div class="list">
                 <ul class="listLocation">
-                    <li>Amur</li>
-                    <li>Samara</li>
-                    <li>Bali</li>
-                    <li>Dane</li>
-                    <li>Kilo</li>
-                    <li>Nur-Sultan</li>
+                    <li class="location"> <button class="enterCity">Amur</button> <button class="deleteButton"></button></li>
+                    <li class="location"><button class="enterCity">Samara</button> <button class="deleteButton"></button></li>
+                    <li class="location"><button class="enterCity">Bali</button> <button class="deleteButton"></button></li>
+                    <li class="location"><button class="enterCity">Dane</button> <button class="deleteButton"></button></li>
+                    <li class="location"><button class="enterCity">Kilo</button> <button class="deleteButton"></button></li>
+                    <li class="location"><button class="enterCity">Nur-Sultan</button> <button class="deleteButton"></button></li>
                 </ul>
             </div>
         </div>
@@ -83,7 +83,7 @@
 
 
 
-
+    <script type="module" src="main.js"></script>
 
 </body>
 
