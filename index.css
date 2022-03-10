@@ -324,7 +324,7 @@
     grid-row: 5/7;
 }
 
-.weatheronditions {
+.weatherconditions {
     grid-row: 3/7;
     grid-column: 2;
     display: grid;
@@ -352,6 +352,9 @@ div[name="infoWeather"]:target {
     height: 20px;
     border: none;
     background-color: #E5E5E5;
+    background-image: url("delete.png");
+    background-repeat: no-repeat;
+    background-position: center;
     visibility: hidden;
 }
 
