@@ -11,5 +11,20 @@ const clouds = document.querySelector(".clouds");
 const sunrise = document.querySelector('.sunrise');
 const sunset = document.querySelector('.sunset');
 const favoritList = document.querySelectorAll(".enterCity");
-const BUTTONS = [submitButton, favoriteButton, deleteButton]
-export { favoritList, deleteButton, submitButton, serverUrl, apiKey, temperatura, city_name, atmosfereNow, favoriteButton, feels_like, clouds, sunrise, sunset, };
+const dates = document.querySelectorAll(".date")
+export {
+    favoritList,
+    deleteButton,
+    submitButton,
+    serverUrl,
+    apiKey,
+    temperatura,
+    city_name,
+    atmosfereNow,
+    favoriteButton,
+    feels_like,
+    clouds,
+    sunrise,
+    sunset,
+    dates
+};
