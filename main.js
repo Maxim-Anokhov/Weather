@@ -23,6 +23,11 @@ deleteButton.forEach(button => button.addEventListener("click", deleteCity));
 
 favoritList.forEach(city => city.addEventListener("click", getFavoritCity));
 
+// function checkCity() {
+//     const cityName = getName()
+//     favoritList.forEach(city => { if (city.textContent !== cityName) { console.log(favoriteButton) } })
+// }
+// checkCity()
 
 function getFavoritCity(event) {
     const city = event.currentTarget.textContent;
@@ -78,22 +83,31 @@ function changeWeater() {
 function weaterNow() {
     const response = getResponse();
     const url = "http://openweathermap.org/img/wn/"
-    response.then(data => temperatura.forEach(item => item.innerHTML = Math.round(data.main.temp) + "&#176;"));
-    response.then(data => atmosfereNow.src = `${url}${data.weather[0].icon}@2x.png`);
-    response.then(data => city_name.forEach(item => item.innerHTML = data.name));
+
+    response.then(data => {
+        const temp = Math.round(data.main.temp) + "&#176;";
+        const clouds = `${url}${data.weather[0].icon}@2x.png`;
+        const cityName = data.name;
+        temperatura.forEach(item => item.innerHTML = temp);
+        atmosfereNow.src = clouds;
+        city_name.forEach(item => item.innerHTML = cityName);
+    })
 }
 
 function weaterDetails() {
     const response = getResponse();
     const options = { hour: "numeric", minute: "numeric" }
-    response.then(data => feels_like.innerHTML = `Feelse like: ${data.main.feels_like }&#176;`);
-    response.then(data => clouds.innerHTML = `Weather: ${data.weather[0].main}`);
-    response.then(data => new Date(data.sys.sunrise))
-        .then(data => data.toLocaleTimeString('ru-RU', options))
-        .then(data => sunrise.innerHTML = `Sunrise: ${data}`);
-    response.then(data => new Date(data.sys.sunset))
-        .then(data => data.toLocaleTimeString('UTC', options))
-        .then(data => sunset.innerHTML = `Sunset: ${data}`);
+
+    response.then(data => {
+        const feelsLike = `Feelse like: ${data.main.feels_like }&#176;`;
+        const weather = `Weather: ${data.weather[0].main}`;
+        const sunriseData = new Date(data.sys.sunrise).toLocaleTimeString('ru-RU', options);
+        const sunsetData = new Date(data.sys.sunset).toLocaleTimeString('UTC', options);
+        feels_like.innerHTML = feelsLike;
+        clouds.innerHTML = weather;
+        sunrise.innerHTML = sunriseData;
+        sunset.innerHTML = sunsetData
+    })
 
 }
 
