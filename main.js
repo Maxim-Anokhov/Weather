@@ -105,8 +105,8 @@ function weaterDetails() {
         const sunsetData = new Date(data.sys.sunset).toLocaleTimeString('UTC', options);
         feels_like.innerHTML = feelsLike;
         clouds.innerHTML = weather;
-        sunrise.innerHTML = sunriseData;
-        sunset.innerHTML = sunsetData
+        sunrise.innerHTML = `Sunrise: ${ sunriseData}`;
+        sunset.innerHTML = `Sunset: ${ sunsetData}`;
     })
 
 }
