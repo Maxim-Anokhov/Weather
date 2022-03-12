@@ -82,7 +82,7 @@ function changeWeater() {
 
 function weaterNow() {
     const response = getResponse();
-    const url = "http://openweathermap.org/img/wn/"
+    const url = "https://openweathermap.org/img/wn/"
 
     response.then(data => {
         const temp = Math.round(data.main.temp) + "&#176;";
@@ -118,7 +118,7 @@ function weaterForecast() {
     const optionsTime = { hour: "numeric", minute: "numeric" }
 
     response.then(data => data.list).then(data => {
-        const url = "http://openweathermap.org/img/wn/"
+        const url = "https://openweathermap.org/img/wn/"
         const forecast = document.querySelector(".infoWeatherForecast")
         document.querySelector(".forecast").remove()
         const div = ` <div class="forecast">
