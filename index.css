@@ -340,7 +340,11 @@
     grid-template-rows: 21px 31px;
     align-content: center;
     justify-content: center;
-    justify-items: center
+    justify-items: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 div[name="infoWeather"] {

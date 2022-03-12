@@ -64,7 +64,8 @@ function getResponse() {
 function responseForecast() {
     const serverUrl = "https://api.openweathermap.org/data/2.5/forecast"
     const response = getResponse();
-    return response.then(data => fetch(`${serverUrl}?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}&units=metric`))
+    return response.then(data => data.coord)
+        .then(data => fetch(`${serverUrl}?lat=${data.lat}&lon=${data.lon}&appid=${apiKey}&units=metric`))
         .then(data => data.json())
 }
 
@@ -76,8 +77,9 @@ function changeWeater() {
 
 function weaterNow() {
     const response = getResponse();
+    const url = "http://openweathermap.org/img/wn/"
     response.then(data => temperatura.forEach(item => item.innerHTML = Math.round(data.main.temp) + "&#176;"));
-    response.then(data => atmosfereNow.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+    response.then(data => atmosfereNow.src = `${url}${data.weather[0].icon}@2x.png`);
     response.then(data => city_name.forEach(item => item.innerHTML = data.name));
 }
 
@@ -101,49 +103,50 @@ function weaterForecast() {
     const optionsDate = { day: "numeric", month: "long" }
     const optionsTime = { hour: "numeric", minute: "numeric" }
 
-    response.then(data => {
-        document.querySelector(".forecast").remove()
+    response.then(data => data.list).then(data => {
+        const url = "http://openweathermap.org/img/wn/"
         const forecast = document.querySelector(".infoWeatherForecast")
+        document.querySelector(".forecast").remove()
         const div = ` <div class="forecast">
         <div class="forecastWindow">
-           <li class="date">${(new Date(data.list[0].dt_txt))
+           <li class="date">${(new Date(data[0].dt_txt))
                .toLocaleString('EN-en', optionsDate)}</li>   
-           <li class="time">${(new Date(data.list[0].dt_txt))
+           <li class="time">${(new Date(data[0].dt_txt))
                .toLocaleString('ru', optionsTime)}</li>
-               <li class="temper">Temperature:${Math.round(data.list[0].main.temp)}&#176;</li>
-                   <li class="feelsLike">Feels Like: ${Math.round(data.list[0].main.feels_like)}&#176;</li>
-                       <li class="weatherconditions ">${data.list[0].weather[0].main}
-                       <img class="img"src="http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png"></li>
-                   </div>
-                   <div class="forecastWindow">
-           <li class="date">${(new Date(data.list[1].dt_txt))
+           <li class="temper">Temperature:${Math.round(data[0].main.temp)}&#176;</li>
+           <li class="feelsLike">Feels Like: ${Math.round(data[0].main.feels_like)}&#176;</li>
+           <li class="weatherconditions ">${data[0].weather[0].main}
+           <img class="img"src="${url}${data[0].weather[0].icon}@2x.png"></li>
+        </div>
+        <div class="forecastWindow">
+           <li class="date">${(new Date(data[1].dt_txt))
                .toLocaleString('EN-en', optionsDate)}</li>   
-           <li class="time">${(new Date(data.list[1].dt_txt))
+           <li class="time">${(new Date(data[1].dt_txt))
                .toLocaleString('ru', optionsTime)}</li>
-               <li class="temper">Temperature:${Math.round(data.list[1].main.temp)}&#176;</li>
-                   <li class="feelsLike">Feels Like: ${Math.round(data.list[1].main.feels_like)}&#176;</li>
-                       <li class="weatherconditions">${data.list[1].weather[0].main}
-                       <img class="img"src="http://openweathermap.org/img/wn/${data.list[1].weather[0].icon}@2x.png"></li>
-                   </div>
-                   <div class="forecastWindow">
-           <li class="date">${(new Date(data.list[2].dt_txt))
+           <li class="temper">Temperature:${Math.round(data[1].main.temp)}&#176;</li>
+           <li class="feelsLike">Feels Like: ${Math.round(data[1].main.feels_like)}&#176;</li>
+           <li class="weatherconditions">${data[1].weather[0].main}
+           <img class="img"src="${url}${data[1].weather[0].icon}@2x.png"></li>
+        </div>
+        <div class="forecastWindow">
+           <li class="date">${(new Date(data[2].dt_txt))
                .toLocaleString('EN-en', optionsDate)}</li>   
-           <li class="time">${(new Date(data.list[2].dt_txt))
+           <li class="time">${(new Date(data[2].dt_txt))
                .toLocaleString('ru', optionsTime)}</li>
-               <li class="temper">Temperature:${Math.round(data.list[2].main.temp)}&#176;</li>
-                   <li class="feelsLike">Feels Like: ${Math.round(data.list[2].main.feels_like)}&#176;</li>
-                       <li class="weatherconditions">${data.list[2].weather[0].main}
-                       <img class="img"src="http://openweathermap.org/img/wn/${data.list[2].weather[0].icon}@2x.png" alt=""></li>
-                   </div>
-                   <div class="forecastWindow">
-           <li class="date">${(new Date(data.list[3].dt_txt))
+           <li class="temper">Temperature:${Math.round(data[2].main.temp)}&#176;</li>
+           <li class="feelsLike">Feels Like: ${Math.round(data[2].main.feels_like)}&#176;</li>
+           <li class="weatherconditions">${data[2].weather[0].main}
+           <img class="img"src="${url}${data[2].weather[0].icon}@2x.png" alt=""></li>
+        </div>
+        <div class="forecastWindow">
+           <li class="date">${(new Date(data[3].dt_txt))
                .toLocaleString('EN-en', optionsDate)}</li>   
-           <li class="time">${(new Date(data.list[3].dt_txt))
+           <li class="time">${(new Date(data[3].dt_txt))
                .toLocaleString('ru', optionsTime)}</li>
-               <li class="temper">Temperature:${Math.round(data.list[3].main.temp)}&#176;</li>
-                   <li class="feelsLike">Feels Like: ${Math.round(data.list[3].main.feels_like)}&#176;</li>
-                       <li class="weatherconditions">${data.list[3].weather[0].main}
-                       <img class="img"src="http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png" alt=""></li>
+           <li class="temper">Temperature:${Math.round(data[3].main.temp)}&#176;</li>
+           <li class="feelsLike">Feels Like: ${Math.round(data[3].main.feels_like)}&#176;</li>
+           <li class="weatherconditions">${data[3].weather[0].main}
+           <img class="img"src="${url}${data[3].weather[0].icon}@2x.png" alt=""></li>
                    </div>
    </div>`;
         forecast.insertAdjacentHTML("beforeend", div);
