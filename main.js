@@ -5,16 +5,33 @@ BUTTONS.SUBMIT_BUTTON.addEventListener("click", changeWeater);
 BUTTONS.DELETE_BUTTON.forEach(button => button.addEventListener("click", deleteCity));
 UI_ELEMENTS.FAVORIT_LIST.forEach(city => city.addEventListener("click", getFavoritCity));
 
+
 function checkCity() {
-    let cityName = getName()
-    let newArray = []
-    const favoritList = document.querySelectorAll(".enterCity")
-    favoritList.forEach(city => newArray.push(city.textContent))
+    let cityName = getName();
+    let newArray = [];
+    const favoritList = document.querySelectorAll(".enterCity");
+    favoritList.forEach(city => newArray.push(city.textContent));
     const favoritCity = newArray.find(city => city === cityName);
     console.log(favoritCity);
     !favoritCity ? addCity() : "";
 }
 
+function addCity() {
+
+    const cityName = getName();
+    const element = `<li class="location"> 
+    <button class="enterCity">${cityName}</button>
+    <button class="deleteButton"></button></li>`
+    const listLocation = document.querySelector(".listLocation");
+    listLocation.insertAdjacentHTML("afterbegin", element);
+    listLocation.firstElementChild.lastElementChild.addEventListener("click", deleteCity);
+    listLocation.firstElementChild.firstElementChild.addEventListener("click", getFavoritCity);
+}
+
+function deleteCity(event) {
+    const location = event.currentTarget.parentElement;
+    location.remove();
+}
 
 function getFavoritCity(event) {
     const city = event.currentTarget.textContent;
@@ -24,26 +41,7 @@ function getFavoritCity(event) {
 
 function getName() {
     const cityName = document.querySelector(".inputWindow").value;
-
     return cityName;
-}
-
-function addCity() {
-
-    const cityName = getName()
-    const element = `<li class="location"> 
-    <button class="enterCity">${cityName}</button>
-    <button class="deleteButton"></button></li>`
-    const listLocation = document.querySelector(".listLocation");
-    listLocation.insertAdjacentHTML("afterbegin", element);
-    listLocation.firstElementChild.lastElementChild.addEventListener("click", deleteCity);
-    listLocation.firstElementChild.firstElementChild.addEventListener("click", getFavoritCity);
-
-}
-
-function deleteCity(event) {
-    const location = event.currentTarget.parentElement;
-    location.remove();
 }
 
 function creatUrl() {
@@ -72,7 +70,7 @@ function changeWeater() {
 
 function weaterNow() {
     const response = getResponse();
-    const url = "https://openweathermap.org/img/wn/"
+    const url = "https://openweathermap.org/img/wn/";
 
     response.then(data => {
         const temp = Math.round(data.main.temp) + "&#176;";
@@ -101,15 +99,14 @@ function weaterDetails() {
 }
 
 function weaterForecast() {
-
     const response = responseForecast();
-    const optionsDate = { day: "numeric", month: "long" }
-    const optionsTime = { hour: "numeric", minute: "numeric" }
+    const optionsDate = { day: "numeric", month: "long" };
+    const optionsTime = { hour: "numeric", minute: "numeric" };
     const url = "https://openweathermap.org/img/wn/";
     const forecast = document.querySelector(".forecast");
     const deleteForecast = document.querySelectorAll(".forecastWindow");
     deleteForecast.forEach(forecast => forecast.remove());
-    let parametrsArray = []
+    let parametrsArray = [];
     response.then(data => data.list).then(data => {
         for (let order = 0; order < 10; order++) {
 
@@ -118,7 +115,7 @@ function weaterForecast() {
                 date: (new Date(data[order].dt_txt)).toLocaleString('EN-en', optionsDate),
                 time: (new Date(data[order].dt_txt)).toLocaleString('ru', optionsTime),
                 temperature: Math.round(data[order].main.temp),
-                filsLike: Math.round(data[order].main.feels_like),
+                feelsLike: Math.round(data[order].main.feels_like),
                 condition: data[order].weather[0].main,
                 img: data[order].weather[0].icon,
             })
