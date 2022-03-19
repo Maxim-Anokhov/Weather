@@ -16,8 +16,6 @@ function checkCity() {
     !favoritCity ? addCity(cityName) : "";
 }
 
-let id = 0;
-
 function addCity(city) {
 
     const cityName = city;
@@ -34,15 +32,19 @@ function addCity(city) {
 function setLocalStorage(city) {
     const cityName = favorit_list.find(item => item === city);
     if (city !== cityName) {
-        favorit_list.push(city)
+        favorit_list.push(city);
     }
     localStorage.setItem("list", JSON.stringify(favorit_list));
+
 }
 
 function chengeStoreage() {
     const new_list = localStorage.getItem("list");
     const list = JSON.parse(new_list);
+    const city = JSON.parse(localStorage.getItem("city"))
 
+    document.querySelector(".inputWindow").value = city;
+    changeWeater()
     list.forEach(item => {
         if (localStorage.getItem("list") !== null) {
             favorit_list.push(item);
@@ -72,6 +74,7 @@ function getFavoritCity(event) {
 
 function getName() {
     const cityName = document.querySelector(".inputWindow").value;
+    localStorage.setItem("city", JSON.stringify(cityName));
     return cityName;
 }
 
@@ -93,7 +96,8 @@ function responseForecast() {
         .then(data => data.json())
 }
 
-function changeWeater() {
+function changeWeater(event) {
+    if (event) { event.preventDefault(); }
     weaterNow();
     weaterDetails();
     weaterForecast();
