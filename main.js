@@ -5,6 +5,7 @@ BUTTONS.SUBMIT_BUTTON.addEventListener("click", changeWeater);
 BUTTONS.DELETE_BUTTON.forEach(button => button.addEventListener("click", deleteCity));
 UI_ELEMENTS.FAVORIT_LIST.forEach(city => city.addEventListener("click", getFavoritCity));
 
+let favorit_list = [];
 
 function checkCity() {
     let cityName = getName();
@@ -12,25 +13,55 @@ function checkCity() {
     const favoritList = document.querySelectorAll(".enterCity");
     favoritList.forEach(city => newArray.push(city.textContent));
     const favoritCity = newArray.find(city => city === cityName);
-    console.log(favoritCity);
-    !favoritCity ? addCity() : "";
+    !favoritCity ? addCity(cityName) : "";
 }
 
-function addCity() {
+let id = 0;
 
-    const cityName = getName();
+function addCity(city) {
+
+    const cityName = city;
+    const listLocation = document.querySelector(".listLocation");
     const element = `<li class="location"> 
     <button class="enterCity">${cityName}</button>
     <button class="deleteButton"></button></li>`
-    const listLocation = document.querySelector(".listLocation");
     listLocation.insertAdjacentHTML("afterbegin", element);
     listLocation.firstElementChild.lastElementChild.addEventListener("click", deleteCity);
     listLocation.firstElementChild.firstElementChild.addEventListener("click", getFavoritCity);
+    setLocalStorage(cityName);
 }
+
+function setLocalStorage(city) {
+    const cityName = favorit_list.find(item => item === city);
+    if (city !== cityName) {
+        favorit_list.push(city)
+    }
+    localStorage.setItem("list", JSON.stringify(favorit_list));
+}
+
+function chengeStoreage() {
+    const new_list = localStorage.getItem("list");
+    const list = JSON.parse(new_list);
+
+    list.forEach(item => {
+        if (localStorage.getItem("list") !== null) {
+            favorit_list.push(item);
+        }
+    })
+    favorit_list.forEach(item => addCity(item))
+}
+
+
 
 function deleteCity(event) {
     const location = event.currentTarget.parentElement;
+    const locationItem = location.firstElementChild.innerHTML;
+    const chenged_list = favorit_list.filter(item => item !== locationItem);
     location.remove();
+    localStorage.setItem("list", JSON.stringify(chenged_list))
+    console.log(chenged_list)
+    console.log(locationItem)
+
 }
 
 function getFavoritCity(event) {
@@ -133,3 +164,4 @@ function weaterForecast() {
         })
     });
 }
+chengeStoreage();

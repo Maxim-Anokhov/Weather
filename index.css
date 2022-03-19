@@ -133,13 +133,14 @@
     grid-column: 4/5;
     border: 1px solid #000000;
     align-items: flex-start;
-    align-content: space-around;
+    /* align-content: space-around; */
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 24px;
     line-height: 43px;
     overflow: scroll;
+    height: auto;
 }
 
 .list::-webkit-scrollbar {
