@@ -2,6 +2,7 @@ const BUTTONS = {
     SUBMIT_BUTTON: document.querySelector(".header"),
     FAVORIT_BUTTON: document.querySelector(".heart"),
     DELETE_BUTTON: document.querySelectorAll(".deleteButton"),
+    NAVI_BUTTONS: document.querySelectorAll(".navi_btn"),
 }
 const UI_ELEMENTS = {
     TEMPERATURA: document.querySelectorAll(".temp"),
