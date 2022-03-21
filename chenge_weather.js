@@ -12,6 +12,7 @@ function responseForecast() {
     return response.then(data => data.coord)
         .then(data => fetch(`${serverUrl}?lat=${data.lat}&lon=${data.lon}&appid=${apiKey}&units=metric`))
         .then(data => data.json())
+
 }
 
 function weatherNow() {
@@ -33,7 +34,7 @@ function weatherDetails() {
     const options = { hour: "numeric", minute: "numeric" }
 
     response.then(data => {
-        const feelsLike = `Feelse like: ${data.main.feels_like }&#176;`;
+        const feelsLike = `Feelse like:${ Math.round(data.main.feels_like) }&#176;`;
         const weather = `Weather: ${data.weather[0].main}`;
         const sunriseData = new Date(data.sys.sunrise).toLocaleTimeString('ru-RU', options);
         const sunsetData = new Date(data.sys.sunset).toLocaleTimeString('UTC', options);

@@ -1,18 +1,25 @@
 import { BUTTONS, UI_ELEMENTS, serverUrl, apiKey, } from "./view.js";
 import { weatherNow, weatherDetails, weatherForecast } from "./chenge_weather.js";
 
-BUTTONS.NAVI_BUTTONS.forEach(button => button.addEventListener("click", chengeViewBtn))
+BUTTONS.NAVI_BUTTONS.forEach(button => button.addEventListener("click", chengingTabs))
 BUTTONS.FAVORIT_BUTTON.addEventListener("click", checkCity);
 BUTTONS.SUBMIT_BUTTON.addEventListener("click", changeWeather);
 BUTTONS.DELETE_BUTTON.forEach(button => button.addEventListener("click", deleteCity));
 UI_ELEMENTS.FAVORIT_LIST.forEach(city => city.addEventListener("click", getFavoritCity));
 const favorit_list = [];
 
-function chengeViewBtn(event) {
+
+function chengingTabs(event) {
     const buttons = Array.from(BUTTONS.NAVI_BUTTONS);
+    const index_button = buttons.findIndex(id => id == event.currentTarget);
+    const tabs = Array.from(UI_ELEMENTS.TABS);
+    const activ_tab = tabs[index_button];
+    const passiv_tabs = tabs.filter(item => item !== activ_tab);
+    const passiv_buttons = buttons.filter(btn => btn !== event.currentTarget);
+    activ_tab.classList.add("infoWeatherAktiv");
+    passiv_tabs.forEach(item => item.classList.remove("infoWeatherAktiv"))
     event.currentTarget.classList.add("aktiv_btn");
-    const passiv_btn = buttons.filter(btn => btn !== event.currentTarget);
-    passiv_btn.forEach(button => button.classList.remove("aktiv_btn"))
+    passiv_buttons.forEach(button => button.classList.remove("aktiv_btn"))
 
 }
 
@@ -97,6 +104,12 @@ function changeWeather(event) {
     weatherForecast();
 }
 
+function startPage() {
+    document.querySelector(".nowBtn").classList.add("aktiv_btn")
+    UI_ELEMENTS.TABS.forEach(item => item.classList.add("infoWeatherPassiv"))
+    document.querySelector(".infoWeatherNow").classList.add("infoWeatherAktiv")
+}
+startPage()
 chengeStoreage();
-changeWeather()
+
 export { creatUrl };

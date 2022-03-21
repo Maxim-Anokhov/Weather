@@ -13,7 +13,8 @@ const UI_ELEMENTS = {
     SUNRISE: document.querySelector('.sunrise'),
     SUNSET: document.querySelector('.sunset'),
     FAVORIT_LIST: document.querySelectorAll(".enterCity"),
-    DATES: document.querySelectorAll(".date")
+    DATES: document.querySelectorAll(".date"),
+    TABS: document.querySelectorAll(".infoWeather"),
 }
 const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
 const apiKey = "97f36208f41daeec8c857deb48d7e06c"
