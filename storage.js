@@ -1,31 +1,29 @@
-import { UI_ELEMENTS, } from "./view.js";
-import { changeWeather, addCity } from "./main.js";
+import { changeWeather, addFavoritCity, getName, } from "./main.js";
 const favorit_list = [];
 
 function setLocalStorage(city) {
-    const cityName = favorit_list.find(item => item === city);
-    if (city !== cityName) {
+
+    const favoritCityName = favorit_list.find(item => item === city);
+    const currentCity = document.querySelector(".cityName").innerHTML;
+    if (city !== favoritCityName) {
         favorit_list.push(city);
     }
     localStorage.setItem("list", JSON.stringify(favorit_list));
+    localStorage.setItem("city", JSON.stringify(currentCity));
 
 }
 
-function chengeStoreage() {
+function chengeLocalStoreage() {
     const new_list = localStorage.getItem("list");
     const list = JSON.parse(new_list);
-    const city = JSON.parse(localStorage.getItem("city"))
-    document.querySelector(".inputWindow").value = city;
+    const currentCity = JSON.parse(localStorage.getItem("city"));
+
     if (localStorage.getItem("list") !== null) {
-        list.forEach(item => favorit_list.push(item))
+        list.forEach(item => favorit_list.push(item));
     }
-    favorit_list.forEach(item => addCity(item))
-    changeWeather()
+    favorit_list.forEach(item => addFavoritCity(item));
+    changeWeather();
+    return currentCity;
 }
 
-function startPage() {
-    document.querySelector(".nowBtn").classList.add("aktiv_btn")
-    UI_ELEMENTS.TABS.forEach(item => item.classList.add("infoWeatherPassiv"))
-    document.querySelector(".infoWeatherNow").classList.add("infoWeatherAktiv")
-}
-export { setLocalStorage, chengeStoreage, startPage }
+export { setLocalStorage, chengeLocalStoreage, favorit_list }

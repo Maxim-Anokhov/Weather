@@ -19,14 +19,16 @@ function weatherNow() {
     const response = getResponse();
     const url = "https://openweathermap.org/img/wn/";
 
-    response.then(data => {
-        const temp = Math.round(data.main.temp) + "&#176;";
-        const clouds = `${url}${data.weather[0].icon}@2x.png`;
-        const cityName = data.name;
-        UI_ELEMENTS.TEMPERATURA.forEach(item => item.innerHTML = temp);
-        UI_ELEMENTS.ATMOSFERE_NOW.src = clouds;
-        UI_ELEMENTS.CITY_NAME.forEach(item => item.innerHTML = cityName);
-    })
+    try {
+        response.then(data => {
+            const temp = Math.round(data.main.temp) + "&#176;";
+            const clouds = `${url}${data.weather[0].icon}@2x.png`;
+            const cityName = data.name;
+            UI_ELEMENTS.TEMPERATURA.forEach(item => item.innerHTML = temp);
+            UI_ELEMENTS.ATMOSFERE_NOW.src = clouds;
+            UI_ELEMENTS.CITY_NAME.forEach(item => item.innerHTML = cityName);
+        })
+    } catch { alert("invalid name") }
 }
 
 function weatherDetails() {
@@ -80,4 +82,4 @@ function weatherForecast() {
         })
     });
 }
-export { weatherNow, weatherDetails, weatherForecast };
+export { weatherNow, weatherDetails, weatherForecast, };
