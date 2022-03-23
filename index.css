@@ -155,6 +155,7 @@
     height: 22px;
     width: 530px;
     border: none;
+    border-color: #FFFFFF;
     margin-left: 13px;
     grid-column: 1/4;
 }

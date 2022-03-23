@@ -1,9 +1,11 @@
 import { apiKey, UI_ELEMENTS } from "./view.js";
 import { creatUrl } from "./main.js";
 
-function getResponse() {
+async function getResponse() {
     const url = creatUrl();
-    return fetch(url).then(response => response.json());
+    const requst = await fetch(url);
+    const response = await requst.json();
+    return response;
 }
 
 function responseForecast() {
@@ -19,16 +21,15 @@ function weatherNow() {
     const response = getResponse();
     const url = "https://openweathermap.org/img/wn/";
 
-    try {
-        response.then(data => {
-            const temp = Math.round(data.main.temp) + "&#176;";
-            const clouds = `${url}${data.weather[0].icon}@2x.png`;
-            const cityName = data.name;
-            UI_ELEMENTS.TEMPERATURA.forEach(item => item.innerHTML = temp);
-            UI_ELEMENTS.ATMOSFERE_NOW.src = clouds;
-            UI_ELEMENTS.CITY_NAME.forEach(item => item.innerHTML = cityName);
-        })
-    } catch { alert("invalid name") }
+    response.then(data => {
+        const temp = Math.round(data.main.temp) + "&#176;";
+        const clouds = `${url}${data.weather[0].icon}@2x.png`;
+        const cityName = data.name;
+        UI_ELEMENTS.TEMPERATURA.forEach(item => item.innerHTML = temp);
+        UI_ELEMENTS.ATMOSFERE_NOW.src = clouds;
+        UI_ELEMENTS.CITY_NAME.forEach(item => item.innerHTML = cityName);
+    })
+
 }
 
 function weatherDetails() {
@@ -45,6 +46,7 @@ function weatherDetails() {
         UI_ELEMENTS.SUNRISE.innerHTML = `Sunrise: ${ sunriseData}`;
         UI_ELEMENTS.SUNSET.innerHTML = `Sunset: ${ sunsetData}`;
     })
+
 }
 
 function weatherForecast() {
@@ -80,6 +82,6 @@ function weatherForecast() {
                         </div>`;
             forecast.insertAdjacentHTML("beforeend", div);
         })
-    });
+    }).catch(error => alert(error = "Error: invalid name"))
 }
 export { weatherNow, weatherDetails, weatherForecast, };

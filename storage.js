@@ -1,4 +1,4 @@
-import { changeWeather, addFavoritCity, getName, } from "./main.js";
+import { changeWeather, addFavoritCity, } from "./main.js";
 const favorit_list = [];
 
 function setLocalStorage(city) {
