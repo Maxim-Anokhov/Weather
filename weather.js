@@ -3,17 +3,20 @@ import { creatUrl } from "./main.js";
 
 async function getResponse() {
     const url = creatUrl();
-    const requst = await fetch(url);
-    const response = await requst.json();
+    const request = await fetch(url);
+    const response = await request.json();
     return response;
 }
 
-function responseForecast() {
+async function responseForecast() {
     const serverUrl = "https://api.openweathermap.org/data/2.5/forecast"
-    const response = getResponse();
-    return response.then(data => data.coord)
-        .then(data => fetch(`${serverUrl}?lat=${data.lat}&lon=${data.lon}&appid=${apiKey}&units=metric`))
-        .then(data => data.json())
+    const request = await getResponse();
+    const coord = await request.coord;
+
+    const url = `${serverUrl}?lat=${coord.lat}&lon=${coord.lon}&appid=${apiKey}&units=metric`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
 
 }
 
@@ -59,20 +62,20 @@ function weatherForecast() {
     deleteForecast.forEach(forecast => forecast.remove());
     let parametrsArray = [];
     response.then(data => data.list).then(data => {
-        for (let order = 0; order < 10; order++) {
+            for (let order = 0; order < 10; order++) {
 
-            let parametrs
-            parametrsArray.push(parametrs = {
-                date: (new Date(data[order].dt_txt)).toLocaleString('EN-en', optionsDate),
-                time: (new Date(data[order].dt_txt)).toLocaleString('ru', optionsTime),
-                temperature: Math.round(data[order].main.temp),
-                feelsLike: Math.round(data[order].main.feels_like),
-                condition: data[order].weather[0].main,
-                img: data[order].weather[0].icon,
-            })
-        }
-        parametrsArray.forEach(parametrs => {
-            const div = `<div class="forecastWindow">
+                let parametrs
+                parametrsArray.push(parametrs = {
+                    date: (new Date(data[order].dt_txt)).toLocaleString('EN-en', optionsDate),
+                    time: (new Date(data[order].dt_txt)).toLocaleString('ru', optionsTime),
+                    temperature: Math.round(data[order].main.temp),
+                    feelsLike: Math.round(data[order].main.feels_like),
+                    condition: data[order].weather[0].main,
+                    img: data[order].weather[0].icon,
+                })
+            }
+            parametrsArray.forEach(parametrs => {
+                const div = `<div class="forecastWindow">
                            <li class="date">${parametrs.date}</li>   
                            <li class="time">${parametrs.time}</li>
                            <li class="temper">Temperature:${parametrs.temperature}&#176;</li>
@@ -80,8 +83,9 @@ function weatherForecast() {
                            <li class="weatherconditions ">${parametrs.condition}
                            <img class="img"src="${url}${parametrs.img}@2x.png"></li>
                         </div>`;
-            forecast.insertAdjacentHTML("beforeend", div);
+                forecast.insertAdjacentHTML("beforeend", div);
+            })
         })
-    }).catch(error => alert(error = "Error: invalid name"))
+        .catch(error => alert(error = "Error: invalid name"))
 }
 export { weatherNow, weatherDetails, weatherForecast, };
