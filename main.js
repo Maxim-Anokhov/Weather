@@ -25,17 +25,14 @@ function checkFavoritCity() {
 }
 
 function addFavoritCity(city) {
-
-    if (city !== "") {
-        const listLocation = document.querySelector(".listLocation");
-        const element = `<li class="location"> 
+    const listLocation = document.querySelector(".listLocation");
+    const element = `<li class="location"> 
         <button class="enterCity">${city}</button>
         <button class="deleteButton"></button></li>`
-        listLocation.insertAdjacentHTML("afterbegin", element);
-        listLocation.firstElementChild.lastElementChild.addEventListener("click", deleteCity);
-        listLocation.firstElementChild.firstElementChild.addEventListener("click", getFavoritCity);
-        favoritCityes(city);
-    }
+    listLocation.insertAdjacentHTML("afterbegin", element);
+    listLocation.firstElementChild.lastElementChild.addEventListener("click", deleteCity);
+    listLocation.firstElementChild.firstElementChild.addEventListener("click", getFavoritCity);
+    favoritCityes(city);
 }
 
 function deleteCity(event) {

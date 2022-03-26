@@ -1,12 +1,8 @@
 import { changeWeather, addFavoritCity, favorit_list } from "./main.js";
 
-
 function favoritCityes(city) {
-
-    const cityes_list = []
     favorit_list.add(city);
-    favorit_list.forEach(city => cityes_list.push(city));
-    localStorage.setItem("list", JSON.stringify(cityes_list));
+    localStorage.setItem("list", JSON.stringify([...favorit_list]));
 }
 
 function currentCity(city) {
@@ -14,8 +10,7 @@ function currentCity(city) {
 }
 
 function chengeFavoritCityes() {
-    const new_list = localStorage.getItem("list");
-    const list = JSON.parse(new_list);
+    const list = JSON.parse(localStorage.getItem("list"));
     const currentCity = JSON.parse(localStorage.getItem("city"));
     if (list != false) {
         list.forEach(item => favorit_list.add(item));

@@ -12,7 +12,6 @@ async function responseForecast() {
     const serverUrl = "https://api.openweathermap.org/data/2.5/forecast"
     const request = await getResponse();
     const coord = await request.coord;
-
     const url = `${serverUrl}?lat=${coord.lat}&lon=${coord.lon}&appid=${apiKey}&units=metric`;
     const response = await fetch(url);
     const data = await response.json();
@@ -23,7 +22,6 @@ async function responseForecast() {
 function weatherNow() {
     const response = getResponse();
     const url = "https://openweathermap.org/img/wn/";
-
     response.then(data => {
         const temp = Math.round(data.main.temp) + "&#176;";
         const clouds = `${url}${data.weather[0].icon}@2x.png`;

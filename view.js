@@ -1,3 +1,5 @@
+const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const apiKey = "97f36208f41daeec8c857deb48d7e06c";
 const BUTTONS = {
     SUBMIT_BUTTON: document.querySelector(".header"),
     FAVORIT_BUTTON: document.querySelector(".heart"),
@@ -32,6 +34,4 @@ function chengingTabs(event) {
 
 }
 
-const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
-const apiKey = "97f36208f41daeec8c857deb48d7e06c"
 export { BUTTONS, UI_ELEMENTS, serverUrl, apiKey, };
