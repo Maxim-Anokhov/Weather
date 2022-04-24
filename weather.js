@@ -1,21 +1,37 @@
 import { apiKey, UI_ELEMENTS } from "./view.js";
-import { creatUrl } from "./main.js";
+import { changeWeather, creatUrl } from "./main.js";
 
-async function getResponse() {
-    const url = creatUrl();
+async function getResponse(city) {
+    const url = creatUrl(city);
     const request = await fetch(url);
     const response = await request.json();
     return response;
 }
 
-async function responseForecast() {
+async function responseForecast(lat, lon) {
     const serverUrl = "https://api.openweathermap.org/data/2.5/forecast"
     const request = await getResponse();
-    const coord = await request.coord;
-    const url = `${serverUrl}?lat=${coord.lat}&lon=${coord.lon}&appid=${apiKey}&units=metric`;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+
+    async function response(url) {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    }
+    if (lat, lon !== undefined) {
+        const url = `${serverUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+        response(url).then(data => {
+            document.querySelector(".inputWindow").value = data.city.name;
+            changeWeather()
+        })
+    } else {
+        const lat = request.coord.lat;
+        const lon = request.coord.lon;
+        const url = `${serverUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        return response(url)
+    }
+
+
 
 }
 
@@ -58,7 +74,7 @@ function weatherForecast() {
     const forecast = document.querySelector(".forecast");
     const deleteForecast = document.querySelectorAll(".forecastWindow");
     deleteForecast.forEach(forecast => forecast.remove());
-    let parametrsArray = [];
+    const parametrsArray = [];
     response.then(data => data.list).then(data => {
             for (let order = 0; order < 10; order++) {
 
@@ -86,4 +102,4 @@ function weatherForecast() {
         })
         .catch(error => alert(error = "Error: invalid name"))
 }
-export { weatherNow, weatherDetails, weatherForecast, };
+export { weatherNow, weatherDetails, weatherForecast, responseForecast };

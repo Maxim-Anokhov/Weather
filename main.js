@@ -1,11 +1,11 @@
 import { BUTTONS, UI_ELEMENTS, serverUrl, apiKey, } from "./view.js";
-import { weatherNow, weatherDetails, weatherForecast } from "./weather.js";
+import { weatherNow, weatherDetails, weatherForecast, responseForecast } from "./weather.js";
 import { favoritCityes, chengeFavoritCityes, currentCity } from "./storage.js";
 
 BUTTONS.FAVORIT_BUTTON.addEventListener("click", checkFavoritCity);
 BUTTONS.DELETE_BUTTON.forEach(button => button.addEventListener("click", deleteCity));
 UI_ELEMENTS.FAVORIT_LIST.forEach(city => city.addEventListener("click", getFavoritCity));
-BUTTONS.SUBMIT_BUTTON.addEventListener("click", changeWeather);
+BUTTONS.SUBMIT_BUTTON.addEventListener("submit", changeWeather);
 
 const favorit_list = new Set();
 
@@ -55,8 +55,13 @@ function getName() {
     return cityName;
 }
 
-function creatUrl() {
-    const cityName = getName();
+function creatUrl(city) {
+    let cityName;
+    if (city !== undefined) {
+        cityName = city;
+    } else {
+        cityName = getName();
+    }
     return `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
 }
 
@@ -73,11 +78,22 @@ function changeWeather(event) {
 }
 
 function startPage() {
-    const currentCity = JSON.parse(localStorage.getItem("city"));
-    if (currentCity !== "") { document.querySelector(".inputWindow").value = currentCity; }
+
     document.querySelector(".nowBtn").classList.add("aktiv_btn");
     UI_ELEMENTS.TABS.forEach(item => item.classList.add("infoWeatherPassiv"));
     document.querySelector(".infoWeatherNow").classList.add("infoWeatherAktiv");
+    const currentCity = JSON.parse(localStorage.getItem("city"));
+    if (currentCity == undefined || null || "") {
+
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            responseForecast(latitude, longitude);
+        })
+    } else {
+
+        document.querySelector(".inputWindow").value = currentCity;
+        changeWeather()
+    }
 }
 startPage()
 chengeFavoritCityes();

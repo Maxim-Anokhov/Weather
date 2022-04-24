@@ -152,10 +152,11 @@
 }
 
 .inputWindow {
-    height: 22px;
+    height: 25px;
     width: 530px;
-    border: none;
-    border-color: #FFFFFF;
+    font-size: 18px;
+    border-color: #020202;
+    border-radius: 5px;
     margin-left: 13px;
     grid-column: 1/4;
 }
